@@ -13,18 +13,18 @@ C_SRC_OUTPUT ?= $(CURDIR)/../priv/$(PROJECT)
 UNAME_SYS := $(shell uname -s)
 ifeq ($(UNAME_SYS), Darwin)
 	CC ?= cc
-	CFLAGS ?= -O3 -std=c99 -Wall -Wmissing-prototypes $(shell pkg-config --cflags libevent)
-	CXXFLAGS ?= -O3 -Wall
+	CFLAGS ?= -O2 -std=c99 -Wall -Wmissing-prototypes $(shell pkg-config --cflags libevent)
+	CXXFLAGS ?= -O2 -Wall
 	LDFLAGS ?= -flat_namespace -undefined suppress $(shell pkg-config --libs libevent)
 else ifeq ($(UNAME_SYS), FreeBSD)
 	CC ?= cc
-	CFLAGS ?= -O3 -std=c99 -finline-functions -Wall -Wmissing-prototypes -I /usr/local/include
-	CXXFLAGS ?= -O3 -finline-functions -Wall
+	CFLAGS ?= -O2 -std=c99 -finline-functions -Wall -Wmissing-prototypes -I /usr/local/include
+	CXXFLAGS ?= -O2 -finline-functions -Wall
 	LDLIBS += -L /usr/local/lib
 else ifeq ($(UNAME_SYS), Linux)
 	CC ?= gcc
-	CFLAGS ?= -O3 -std=c99 -finline-functions -Wall -Wmissing-prototypes
-	CXXFLAGS ?= -O3 -finline-functions -Wall
+	CFLAGS ?= -O2 -std=c99 -finline-functions -Wall -Wmissing-prototypes
+	CXXFLAGS ?= -O2 -finline-functions -Wall
 endif
 
 CFLAGS += -fPIC -I $(ERTS_INCLUDE_DIR) -I $(ERL_INTERFACE_INCLUDE_DIR)
